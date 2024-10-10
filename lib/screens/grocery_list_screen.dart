@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:cooking_compantion/models/grocery_list_model.dart';
 
 class GroceryListScreen extends StatefulWidget {
   const GroceryListScreen({super.key});
@@ -8,22 +10,66 @@ class GroceryListScreen extends StatefulWidget {
 }
 
 class _GroceryListScreenState extends State<GroceryListScreen> {
-  List<Map<String, dynamic>> _groceryItems = [];
-
+  List<GroceryListModel> _groceryItems = [];
   final TextEditingController _textController = TextEditingController();
+  late Box<GroceryListModel> _groceryBox;
 
+  @override
+  void initState() {
+    super.initState();
+    _initHive();
+  }
+
+  Future<void> _initHive() async {
+    _groceryBox = await Hive.openBox<GroceryListModel>('groceryListBox');
+    setState(() {
+      _groceryItems = _groceryBox.values.toList();
+    });
+  }
+
+  // Add Item to Hive
   void _addItem(String item) {
     if (item.isNotEmpty) {
+      final groceryItem = GroceryListModel(itemName: item);
       setState(() {
-        _groceryItems.add({'name': item, 'isChecked': false});
+        _groceryItems.add(groceryItem);
+        _groceryBox.add(groceryItem); // Speichere den Eintrag in der Hive-Box
       });
       _textController.clear();
     }
   }
 
+  // Remove Item from Hive
   void _removeItem(int index) {
     setState(() {
+      _groceryBox.deleteAt(index); // Entferne den Eintrag aus der Hive-Box
       _groceryItems.removeAt(index);
+    });
+  }
+
+  // Toggle Checkbox Status
+  void _toggleItemChecked(int index) {
+    setState(() {
+      final currentItem = _groceryItems[index];
+      final updatedItem = GroceryListModel(
+        itemName: currentItem.itemName,
+        checked: !currentItem.checked,
+      );
+      _groceryItems[index] = updatedItem;
+      _groceryBox.putAt(index, updatedItem); // Aktualisiere den Eintrag in der Hive-Box
+    });
+  }
+
+  // Remove all checked items from Hive
+  void _removeCheckedItems() {
+    setState(() {
+      _groceryItems.removeWhere((item) => item.checked);
+      _groceryBox.values
+          .where((item) => item.checked)
+          .forEach((item) {
+        final index = _groceryBox.values.toList().indexOf(item);
+        _groceryBox.deleteAt(index);
+      });
     });
   }
 
@@ -36,11 +82,7 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_sweep),
-            onPressed: () {
-              setState(() {
-                _groceryItems.removeWhere((item) => item['isChecked']);
-              });
-            },
+            onPressed: _removeCheckedItems,
           ),
         ],
       ),
@@ -48,20 +90,19 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Stack(
           children: [
-            // Hintergrund-Icon
+            // Hintergrund-Icon, wenn die Liste leer ist
             _groceryItems.isEmpty
                 ? Center(
               child: Opacity(
-                opacity: 0.2, // Für ein dezentes Aussehen
+                opacity: 0.2,
                 child: Icon(
                   Icons.shopping_cart_outlined,
-                  size: 200, // Größe des Icons
+                  size: 200,
                   color: Colors.deepPurple,
                 ),
               ),
             )
-                : SizedBox.shrink(), // Nichts anzeigen, wenn die Liste nicht leer ist
-
+                : const SizedBox.shrink(),
             Column(
               children: [
                 Expanded(
@@ -83,20 +124,18 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
                         },
                         child: ListTile(
                           title: Text(
-                            item['name'],
+                            item.itemName,
                             style: TextStyle(
                               fontSize: 18,
-                              decoration: item['isChecked']
+                              decoration: item.checked
                                   ? TextDecoration.lineThrough
                                   : TextDecoration.none,
                             ),
                           ),
                           trailing: Checkbox(
-                            value: item['isChecked'],
+                            value: item.checked,
                             onChanged: (bool? value) {
-                              setState(() {
-                                item['isChecked'] = value!;
-                              });
+                              _toggleItemChecked(index);
                             },
                           ),
                         ),
@@ -111,7 +150,7 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
                         controller: _textController,
                         decoration: InputDecoration(
                           hintText: 'Add a new item',
-                          hintStyle: const TextStyle(color: Colors.grey), // Dunkelgrauer Text
+                          hintStyle: const TextStyle(color: Colors.grey),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
