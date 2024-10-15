@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:cooking_compantion/models/grocery_list_model.dart';
+import 'package:cooking_compantion/models/meal_plan_model.dart';
 
 class GroceryListService {
   final String _boxName = 'groceryListBox';
@@ -55,3 +56,45 @@ class GroceryListService {
     await box.close();
   }
 }
+
+class MealPlannerService {
+  final String _boxName = 'mealPlanBox';
+
+  // Öffne die Box
+  Future<Box<MealPlanModel>> _openBox() async {
+    return await Hive.openBox<MealPlanModel>(_boxName);
+  }
+
+  // Create: Füge einen neuen Eintrag hinzu oder aktualisiere einen vorhandenen
+  Future<void> saveMeal(String day, String meal) async {
+    final box = await _openBox();
+    final mealPlan = MealPlanModel(day: day, meal: meal);
+    await box.put(day, mealPlan);
+  }
+
+  // Read: Hol die Mahlzeit für einen bestimmten Tag
+  Future<String> getMeal(String day) async {
+    final box = await _openBox();
+    final mealPlan = box.get(day);
+    return mealPlan?.meal ?? '';
+  }
+
+  // Delete: Lösche den Plan für einen bestimmten Tag
+  Future<void> deleteMeal(String day) async {
+    final box = await _openBox();
+    await box.delete(day);
+  }
+
+  // Clear: Lösche alle Einträge
+  Future<void> clearPlan() async {
+    final box = await _openBox();
+    await box.clear();
+  }
+
+  // Schließe die Box (optional)
+  Future<void> closeBox() async {
+    final box = await _openBox();
+    await box.close();
+  }
+}
+

@@ -1,8 +1,8 @@
 import 'package:cooking_compantion/models/grocery_list_model.dart';
+import 'package:cooking_compantion/models/meal_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 // Import the different screens
 import 'screens/home_screen.dart';
@@ -18,11 +18,13 @@ void main() async {
   // Initialize Hive with Flutter support
   Hive.init("Hive_db");
 
-  // Register the GroceryListModel adapter
   Hive.registerAdapter(GroceryListModelAdapter());
 
-  // Open a box for grocery list items (or any other data)
   await Hive.openBox<GroceryListModel>('groceryListBox');
+
+  Hive.registerAdapter(MealPlanModelAdapter());
+
+  await Hive.openBox<MealPlanModel>('mealPlanBox');
 
   // Run the app
   runApp(CookingCompanionApp());
