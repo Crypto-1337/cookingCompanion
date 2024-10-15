@@ -78,7 +78,6 @@ class _GroceryListScreenState extends State<GroceryListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Grocery List'),
-        backgroundColor: Colors.deepPurple,
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_sweep),

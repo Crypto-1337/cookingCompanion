@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive with Flutter support
-  Hive.init("~/Documents");
+  Hive.init("Hive_db");
 
   // Register the GroceryListModel adapter
   Hive.registerAdapter(GroceryListModelAdapter());
