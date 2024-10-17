@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:cooking_compantion/models/grocery_list_model.dart';
 import 'package:cooking_compantion/models/meal_plan_model.dart';
+import 'package:cooking_compantion/models/recipe_model.dart';
 
 class GroceryListService {
   final String _boxName = 'groceryListBox';
@@ -87,6 +88,57 @@ class MealPlannerService {
 
   // Clear: Lösche alle Einträge
   Future<void> clearPlan() async {
+    final box = await _openBox();
+    await box.clear();
+  }
+
+  // Schließe die Box (optional)
+  Future<void> closeBox() async {
+    final box = await _openBox();
+    await box.close();
+  }
+}
+
+class RecipeService {
+  final String _boxName = 'savedRecipesBox';
+
+  // Öffne die Box
+  Future<Box<RecipeModel>> _openBox() async {
+    return await Hive.openBox<RecipeModel>(_boxName);
+  }
+
+  // Create: Speichere ein neues Rezept
+  Future<void> saveRecipe(RecipeModel recipe) async {
+    final box = await _openBox();
+    await box.put(recipe.id, recipe);
+  }
+
+  // Read: Hol ein bestimmtes Rezept
+  Future<RecipeModel?> getRecipe(int id) async {
+    final box = await _openBox();
+    return box.get(id);
+  }
+
+  // Read: Hol alle gespeicherten Rezepte
+  Future<List<RecipeModel>> getAllRecipes() async {
+    final box = await _openBox();
+    return box.values.toList();
+  }
+
+  // Update: Aktualisiere ein Rezept
+  Future<void> updateRecipe(RecipeModel recipe) async {
+    final box = await _openBox();
+    await box.put(recipe.id, recipe);
+  }
+
+  // Delete: Lösche ein Rezept
+  Future<void> deleteRecipe(int id) async {
+    final box = await _openBox();
+    await box.delete(id);
+  }
+
+  // Clear: Lösche alle gespeicherten Rezepte
+  Future<void> clearRecipes() async {
     final box = await _openBox();
     await box.clear();
   }

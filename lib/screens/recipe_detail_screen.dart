@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/interface.dart';
+import '../models/recipe_model.dart';
+import '../services/service.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final int recipeId;
@@ -11,6 +13,12 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Recipe Details'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () => _saveRecipe(context), // Rezept speichern
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: SpoonacularService().fetchRecipeDetails(recipeId),
@@ -26,7 +34,6 @@ class RecipeDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Füge Rezeptbild hinzu
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
@@ -70,4 +77,32 @@ class RecipeDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _saveRecipe(BuildContext context) async {
+    final recipeService = RecipeService();
+
+    final recipe = await SpoonacularService().fetchRecipeDetails(recipeId);
+
+    // RecipeModel mit allen relevanten Daten füllen
+    final recipeToSave = RecipeModel(
+      id: recipeId,
+      title: recipe['title'],
+      imageUrl: recipe['image'] ?? '',
+      ingredients: recipe['extendedIngredients']
+          ?.map<String>((ingredient) => ingredient['original']?.toString() ?? 'Unknown ingredient')
+          .toList(),
+      instructions: recipe['instructions'] ?? '',
+      readyInMinutes: recipe['readyInMinutes'] ?? '',
+      servings: recipe['servings'] ?? '',
+    );
+
+    // Speichern im Hive-Storage
+    await recipeService.saveRecipe(recipeToSave);
+
+    // Zeige eine Bestätigung
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Recipe saved successfully!')),
+    );
+  }
+
 }

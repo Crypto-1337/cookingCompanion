@@ -12,7 +12,7 @@ abstract class SpoonacularServiceInterface {
 
 // Implement the SpoonacularServiceInterface
 class SpoonacularService implements SpoonacularServiceInterface {
-  final String apiKey = 'YOUR API KEY'; // Set your API key here
+  final String apiKey = '9b4242e9bc1b477ca5c20a28752d950d'; // Set your API key here
   final String baseUrl = 'https://api.spoonacular.com';
 
   // Fetch random recipes

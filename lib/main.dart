@@ -1,5 +1,6 @@
 import 'package:cooking_compantion/models/grocery_list_model.dart';
 import 'package:cooking_compantion/models/meal_plan_model.dart';
+import 'package:cooking_compantion/models/recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -32,6 +33,10 @@ void main() async {
   Hive.registerAdapter(MealPlanModelAdapter());
 
   await Hive.openBox<MealPlanModel>('mealPlanBox');
+
+  Hive.registerAdapter(RecipeModelAdapter());
+
+  await Hive.openBox<RecipeModel>('recipeBox');
 
   // Run the app
   runApp(CookingCompanionApp());
