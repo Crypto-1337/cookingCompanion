@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 // Import the different screens
 import 'screens/home_screen.dart';
 import 'screens/grocery_list_screen.dart';
-import 'screens/recipe_suggestions_screen.dart';
+import 'screens/recipe_screen.dart';
 import 'screens/meal_planner_screen.dart';
 import 'screens/settings_screen.dart';
 
@@ -45,7 +45,7 @@ class CookingCompanionApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/grocery-list': (context) => GroceryListScreen(),
-        '/recipe-suggestions': (context) => RecipeSuggestionsScreen(),
+        '/recipe-suggestions': (context) => RecipeScreen(),
         '/meal-planner': (context) => MealPlannerScreen(),
         '/settings': (context) => SettingsScreen(),
       },
