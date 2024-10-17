@@ -60,5 +60,6 @@ Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre 
 
 ## Lizenz
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Weitere Informationen findest du in der Datei LICENSE.
+This app is exclusively owned by Jayson Cleve. Any redistribution, commercial use, or unauthorized modification of the codebase, design, or functionality is strictly forbidden and may lead to legal consequences.
 
+Please see the LICENSE file for detailed terms and conditions.
