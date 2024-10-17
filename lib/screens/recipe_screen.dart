@@ -16,7 +16,7 @@ class RecipeScreen extends StatelessWidget {
               title: 'Find Recipes by Ingredients',
               icon: Icons.kitchen,
               onTap: () {
-                Navigator.pushNamed(context, '/find-by-ingredients');
+                Navigator.pushNamed(context, '/recipes-by-ingredients');
               },
             ),
             _buildRecipeOption(
@@ -24,7 +24,7 @@ class RecipeScreen extends StatelessWidget {
               title: 'Search Recipes',
               icon: Icons.search,
               onTap: () {
-                Navigator.pushNamed(context, '/search-recipes');
+                Navigator.pushNamed(context, '/search-recipe');
               },
             ),
             _buildRecipeOption(
@@ -32,7 +32,7 @@ class RecipeScreen extends StatelessWidget {
               title: 'Upload & Analyze Image',
               icon: Icons.camera_alt,
               onTap: () {
-                Navigator.pushNamed(context, '/analyze-image');
+                Navigator.pushNamed(context, '/upload-image');
               },
             ),
             _buildRecipeOption(

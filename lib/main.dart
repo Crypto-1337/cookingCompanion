@@ -10,6 +10,13 @@ import 'screens/grocery_list_screen.dart';
 import 'screens/recipe_screen.dart';
 import 'screens/meal_planner_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/recipes/healthy_recipes_screen.dart';
+import 'screens/recipes/random_recipes_screen.dart';
+import 'screens/recipes/recipes_by_ingredients_screen.dart';
+import 'screens/recipes/saved_recipes_screen.dart';
+import 'screens/recipes/search_recipe_screen.dart';
+import 'screens/recipes/trending_recipes_screen.dart';
+import 'screens/recipes/upload_image_screen.dart';
 
 void main() async {
   // Ensure Flutter is initialized before running any async operations
@@ -42,13 +49,20 @@ class CookingCompanionApp extends StatelessWidget {
         brightness: Brightness.dark, // for the dark mode
       ),
       initialRoute: '/',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/grocery-list': (context) => GroceryListScreen(),
-        '/recipe-suggestions': (context) => RecipeScreen(),
-        '/meal-planner': (context) => MealPlannerScreen(),
-        '/settings': (context) => SettingsScreen(),
-      },
+        routes: {
+          '/': (context) => HomeScreen(),
+          '/grocery-list': (context) => GroceryListScreen(),
+          '/settings': (context) => SettingsScreen(),
+          '/meal-planner': (context) => MealPlannerScreen(),
+          '/recipe-suggestions': (context) => RecipeScreen(), // Hier deine Rezept-Hauptseite
+          '/recipes-by-ingredients': (context) => RecipesByIngredientsScreen(),
+          '/search-recipe': (context) => SearchRecipeScreen(),
+          '/upload-image': (context) => UploadImageScreen(),
+          '/saved-recipes': (context) => SavedRecipesScreen(),
+          '/random-recipes': (context) => RandomRecipesScreen(),
+          '/healthy-recipes': (context) => HealthyRecipesScreen(),
+          '/trending-recipes': (context) => TrendingRecipesScreen(),
+        },
     );
   }
 }
