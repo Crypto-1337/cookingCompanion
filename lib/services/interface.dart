@@ -10,6 +10,7 @@ abstract class SpoonacularServiceInterface {
   Future<List<dynamic>> getSavedRecipes();
   Future<List<dynamic>> getHealthyRecipes(int number); // Added getHealthyRecipes method
   Future<List<dynamic>> getTrendyRecipes(int number);  // Added getTrendyRecipes method
+  Future<List<dynamic>> getAutocompleteSuggestions(String query); // New autocomplete method
 }
 
 // Implement the SpoonacularServiceInterface
@@ -114,6 +115,20 @@ class SpoonacularService implements SpoonacularServiceInterface {
     // Example: You could retrieve this from a local database like Hive
     // For now, let's assume we have a list of saved recipes
     return [];
+  }
+
+  // Implement autocomplete suggestions
+  @override
+  Future<List<dynamic>> getAutocompleteSuggestions(String query) async {
+    final url = Uri.parse('$baseUrl/recipes/autocomplete?apiKey=$apiKey&query=$query');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data;
+    } else {
+      throw Exception('Failed to load autocomplete suggestions');
+    }
   }
 
   Future<Map<String, dynamic>> fetchRecipeDetails(int recipeId) async {
