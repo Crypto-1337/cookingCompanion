@@ -8,11 +8,13 @@ abstract class SpoonacularServiceInterface {
   Future<List<dynamic>> findRecipesByIngredients(List<String> ingredients);
   Future<dynamic> analyzeRecipeImage(String imagePath);
   Future<List<dynamic>> getSavedRecipes();
+  Future<List<dynamic>> getHealthyRecipes(int number); // Added getHealthyRecipes method
+  Future<List<dynamic>> getTrendyRecipes(int number);  // Added getTrendyRecipes method
 }
 
 // Implement the SpoonacularServiceInterface
 class SpoonacularService implements SpoonacularServiceInterface {
-  final String apiKey = '9b4242e9bc1b477ca5c20a28752d950d'; // Set your API key here
+  final String apiKey = 'YOUR API KEY9'; // Set your API key here
   final String baseUrl = 'https://api.spoonacular.com';
 
   // Fetch random recipes
@@ -29,7 +31,35 @@ class SpoonacularService implements SpoonacularServiceInterface {
     }
   }
 
-  // Search recipes with query, excluded ingredients and intolerances
+  // Fetch healthy recipes
+  @override
+  Future<List<dynamic>> getHealthyRecipes(int number) async {
+    final url = Uri.parse('$baseUrl/recipes/complexSearch?apiKey=$apiKey&number=$number&tags=healthy&addRecipeInformation=true');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['results'];
+    } else {
+      throw Exception('Failed to load healthy recipes');
+    }
+  }
+
+  // Fetch trendy recipes (e.g., recipes sorted by popularity)
+  @override
+  Future<List<dynamic>> getTrendyRecipes(int number) async {
+    final url = Uri.parse('$baseUrl/recipes/complexSearch?apiKey=$apiKey&sort=popularity&number=$number&addRecipeInformation=true');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data['results'];
+    } else {
+      throw Exception('Failed to load trendy recipes');
+    }
+  }
+
+  // Search recipes with query, excluded ingredients, and intolerances
   @override
   Future<List<dynamic>> searchRecipes(String query, {List<String>? excludeIngredients, List<String>? intolerances}) async {
     String exclude = excludeIngredients?.join(',') ?? '';
@@ -87,7 +117,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   }
 
   Future<Map<String, dynamic>> fetchRecipeDetails(int recipeId) async {
-    final url = 'https://api.spoonacular.com/recipes/$recipeId/information?apiKey=$apiKey';
+    final url = '$baseUrl/recipes/$recipeId/information?apiKey=$apiKey';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
