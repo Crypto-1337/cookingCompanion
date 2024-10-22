@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cooking_compantion/services/service.dart';
 import '../../services/interface.dart';
 import '../recipe_detail_screen.dart';
+import '../../models/grocery_list_model.dart'; // Importiere das Modell für die Einkaufsliste
 
 class RecipesByIngredientsScreen extends StatefulWidget {
   const RecipesByIngredientsScreen({super.key});
@@ -15,7 +17,10 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
   bool _isLoading = false;
   String? _errorMessage;
 
-  // Function to search for recipes based on ingredients
+  // GroceryListService für das Hinzufügen von Zutaten zur Einkaufsliste
+  final GroceryListService _groceryListService = GroceryListService();
+
+  // Funktion, um Rezepte basierend auf Zutaten zu suchen
   Future<void> _searchRecipesByIngredients() async {
     setState(() {
       _isLoading = true;
@@ -38,6 +43,15 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
     }
   }
 
+  // Methode zum Hinzufügen einer Zutat zur Einkaufsliste
+  Future<void> _addToGroceryList(String ingredientName) async {
+    final newItem = GroceryListModel(itemName: ingredientName, checked: false);
+    await _groceryListService.addGroceryItem(newItem);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$ingredientName added to grocery list!')),
+    );
+  }
+
   @override
   void dispose() {
     _ingredientController.dispose();
@@ -54,7 +68,7 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Text field to input ingredients
+            // Textfeld zur Eingabe der Zutaten
             TextField(
               controller: _ingredientController,
               decoration: InputDecoration(
@@ -64,7 +78,7 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
             ),
             const SizedBox(height: 16),
 
-            // Button to search for recipes
+            // Button zur Suche nach Rezepten
             ElevatedButton(
               onPressed: _searchRecipesByIngredients,
               child: const Text('Search Recipes'),
@@ -72,11 +86,11 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
 
             const SizedBox(height: 16),
 
-            // Show loading indicator or recipes
+            // Ladeanzeige oder Fehlermeldung
             if (_isLoading) CircularProgressIndicator(),
             if (_errorMessage != null) Text(_errorMessage!, style: TextStyle(color: Colors.red)),
 
-            // Display list of found recipes
+            // Anzeige der gefundenen Rezepte
             if (_recipes != null) Expanded(
               child: ListView.builder(
                 itemCount: _recipes!.length,
@@ -95,7 +109,7 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          recipe['image'] ?? '', // Recipe image
+                          recipe['image'] ?? '', // Rezeptbild
                           height: 50,
                           width: 50,
                           fit: BoxFit.cover,
@@ -137,13 +151,23 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
                             children: missedIngredients.map((ingredient) {
                               return Container(
                                 margin: const EdgeInsets.all(4.0), // Abstand zwischen den Chips
-                                child: Chip(
-                                  label: Text(
-                                    ingredient['name'],
-                                    style: TextStyle(color: Colors.black), // Schriftfarbe anpassen
+                                child: GestureDetector(
+                                  onTap: () => _addToGroceryList(ingredient['name']), // Zutat zur Einkaufsliste hinzufügen
+                                  child: Chip(
+                                    label: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          ingredient['name'],
+                                          style: TextStyle(color: Colors.black), // Schriftfarbe anpassen
+                                        ),
+                                        const SizedBox(width: 4), // Abstand zwischen Text und Icon
+                                        Icon(Icons.add, size: 16, color: Colors.black), // "+"-Icon
+                                      ],
+                                    ),
+                                    backgroundColor: Colors.red,
+                                    side: BorderSide(color: Colors.red, width: 0), // Border entfernen oder anpassen
                                   ),
-                                  backgroundColor: Colors.red,
-                                  side: BorderSide(color: Colors.red, width: 0), // Border entfernen oder anpassen
                                 ),
                               );
                             }).toList(),
@@ -152,7 +176,7 @@ class _RecipesByIngredientsScreenState extends State<RecipesByIngredientsScreen>
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, color: Colors.deepPurple),
                       onTap: () {
-                        // Navigate to recipe detail screen
+                        // Navigiere zur Rezeptdetailseite
                         Navigator.push(
                           context,
                           MaterialPageRoute(
