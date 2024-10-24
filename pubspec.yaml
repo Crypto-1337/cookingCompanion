@@ -43,6 +43,7 @@ dependencies:
   build_runner: ^2.4.13
   path_provider: ^2.0.9
   image_picker: ^1.1.2
+  settings_ui: ^2.0.2
 
 dev_dependencies:
   flutter_test:

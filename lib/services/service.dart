@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:cooking_compantion/models/grocery_list_model.dart';
 import 'package:cooking_compantion/models/meal_plan_model.dart';
 import 'package:cooking_compantion/models/recipe_model.dart';
+import 'package:cooking_compantion/models/settings_model.dart';
 
 class GroceryListService {
   final String _boxName = 'groceryListBox';
@@ -150,3 +151,38 @@ class RecipeService {
   }
 }
 
+class SettingsService {
+  final String _boxName = 'settingsBox';
+
+  // Open the settings box
+  Future<Box<SettingsModel>> _openBox() async {
+    return await Hive.openBox<SettingsModel>(_boxName);
+  }
+
+  // Save settings
+  Future<void> saveSettings(SettingsModel settings) async {
+    final box = await _openBox();
+    await box.put('settings', settings);
+  }
+
+  // Get settings
+  Future<SettingsModel> getSettings() async {
+    final box = await _openBox();
+    final settings = box.get('settings') ?? SettingsModel(
+      darkMode: true,
+      mealReminders: false,
+      newRecipeSuggestions: false,
+      confirmBeforeDelete: false,
+      language: 'English',
+      measurementUnit: 'Imperial',
+    );
+
+    return settings; // This will now always return a non-null SettingsModel
+  }
+
+  // Close the box
+  Future<void> closeBox() async {
+    final box = await _openBox();
+    await box.close();
+  }
+}

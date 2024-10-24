@@ -1,9 +1,13 @@
-import 'package:cooking_compantion/models/grocery_list_model.dart';
-import 'package:cooking_compantion/models/meal_plan_model.dart';
-import 'package:cooking_compantion/models/recipe_model.dart';
+// Import the needed packages
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+// Import the models
+import 'package:cooking_compantion/models/grocery_list_model.dart';
+import 'package:cooking_compantion/models/meal_plan_model.dart';
+import 'package:cooking_compantion/models/recipe_model.dart';
+import 'package:cooking_compantion/models/settings_model.dart';
 
 // Import the different screens
 import 'screens/home_screen.dart';
@@ -37,6 +41,10 @@ void main() async {
   Hive.registerAdapter(RecipeModelAdapter());
 
   await Hive.openBox<RecipeModel>('recipeBox');
+
+  Hive.registerAdapter(SettingsModelAdapter());
+
+  await Hive.openBox<SettingsModel>('settingsBox');
 
   // Run the app
   runApp(CookingCompanionApp());
