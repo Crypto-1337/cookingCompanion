@@ -30,52 +30,84 @@ void main() async {
   // Initialize Hive with Flutter support
   Hive.init("Hive_db");
 
+  // Register adapters
   Hive.registerAdapter(GroceryListModelAdapter());
-
   await Hive.openBox<GroceryListModel>('groceryListBox');
 
   Hive.registerAdapter(MealPlanModelAdapter());
-
   await Hive.openBox<MealPlanModel>('mealPlanBox');
 
   Hive.registerAdapter(RecipeModelAdapter());
-
   await Hive.openBox<RecipeModel>('recipeBox');
 
   Hive.registerAdapter(SettingsModelAdapter());
-
   await Hive.openBox<SettingsModel>('settingsBox');
 
+  // Fetch settings from the Hive box or create a new instance with default values
+  var settingsBox = Hive.box<SettingsModel>('settingsBox');
+  SettingsModel settings = settingsBox.get('settings') ?? SettingsModel(
+    darkMode: true,
+    mealReminders: false,
+    newRecipeSuggestions: false,
+    confirmBeforeDelete: false,
+    language: 'English',
+    measurementUnit: 'Imperial',
+  );
+
   // Run the app
-  runApp(CookingCompanionApp());
+  runApp(CookingCompanionApp(settings: settings));
 }
 
-class CookingCompanionApp extends StatelessWidget {
-  const CookingCompanionApp({super.key});
+class CookingCompanionApp extends StatefulWidget {
+  const CookingCompanionApp({super.key, required this.settings});
+
+  final SettingsModel settings;
+
+  // Method to access the state
+  static _CookingCompanionAppState of(BuildContext context) {
+    return context.findAncestorStateOfType<_CookingCompanionAppState>()!;
+  }
+
+  @override
+  _CookingCompanionAppState createState() => _CookingCompanionAppState();
+}
+
+class _CookingCompanionAppState extends State<CookingCompanionApp> {
+  late ThemeData _themeData;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeData = widget.settings.darkMode ? ThemeData.dark() : ThemeData.light();
+  }
+
+  // Method to change the theme
+  void setThemeData(ThemeData theme) {
+    setState(() {
+      _themeData = theme;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cooking Companion App',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        brightness: Brightness.dark, // for the dark mode
-      ),
+      theme: _themeData,
       initialRoute: '/',
-        routes: {
-          '/': (context) => HomeScreen(),
-          '/grocery-list': (context) => GroceryListScreen(),
-          '/settings': (context) => SettingsScreen(),
-          '/meal-planner': (context) => MealPlannerScreen(),
-          '/recipe-suggestions': (context) => RecipeScreen(), // Hier deine Rezept-Hauptseite
-          '/recipes-by-ingredients': (context) => RecipesByIngredientsScreen(),
-          '/search-recipe': (context) => SearchRecipeScreen(),
-          '/upload-image': (context) => UploadImageScreen(),
-          '/saved-recipes': (context) => SavedRecipesScreen(),
-          '/random-recipes': (context) => RandomRecipesScreen(),
-          '/healthy-recipes': (context) => HealthyRecipesScreen(),
-          '/trending-recipes': (context) => TrendingRecipesScreen(),
-        },
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/grocery-list': (context) => GroceryListScreen(),
+        '/settings': (context) => SettingsScreen(),
+        '/meal-planner': (context) => MealPlannerScreen(),
+        '/recipe-suggestions': (context) => RecipeScreen(),
+        '/recipes-by-ingredients': (context) => RecipesByIngredientsScreen(),
+        '/search-recipe': (context) => SearchRecipeScreen(),
+        '/upload-image': (context) => UploadImageScreen(),
+        '/saved-recipes': (context) => SavedRecipesScreen(),
+        '/random-recipes': (context) => RandomRecipesScreen(),
+        '/healthy-recipes': (context) => HealthyRecipesScreen(),
+        '/trending-recipes': (context) => TrendingRecipesScreen(),
+      },
     );
   }
 }

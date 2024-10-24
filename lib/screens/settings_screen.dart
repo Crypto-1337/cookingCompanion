@@ -1,3 +1,4 @@
+import 'package:cooking_compantion/main.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:cooking_compantion/services/service.dart'; // Stelle sicher, dass dieser Pfad korrekt ist
@@ -65,7 +66,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onToggle: (value) async {
                       settings.darkMode = value; // Lokale Einstellungen aktualisieren
                       await _settingsService.saveSettings(settings); // Aktualisierte Einstellungen speichern
-                      setState(() {}); // UI aktualisieren
+                      setState(() {});
+                      if (value) {
+                        // Aktiviere Dark Mode
+                        CookingCompanionApp.of(context).setThemeData(ThemeData.dark());
+                      } else {
+                        // Aktiviere Light Mode
+                        CookingCompanionApp.of(context).setThemeData(ThemeData.light());
+                      }
                     },
                     initialValue: settings.darkMode,
                     leading: const Icon(Icons.dark_mode),
