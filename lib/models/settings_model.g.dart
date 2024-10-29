@@ -23,13 +23,14 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       confirmBeforeDelete: fields[3] as bool,
       language: fields[4] as String,
       measurementUnit: fields[5] as String,
+      apiKey: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, SettingsModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.darkMode)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       ..writeByte(4)
       ..write(obj.language)
       ..writeByte(5)
-      ..write(obj.measurementUnit);
+      ..write(obj.measurementUnit)
+      ..writeByte(6)
+      ..write(obj.apiKey);
   }
 
   @override

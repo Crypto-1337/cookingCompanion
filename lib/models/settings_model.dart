@@ -22,12 +22,16 @@ class SettingsModel extends HiveObject {
   @HiveField(5)
   String measurementUnit;
 
+  @HiveField(6)
+  String apiKey;
+
   SettingsModel({
-    required this.darkMode,
-    required this.mealReminders,
-    required this.newRecipeSuggestions,
-    required this.confirmBeforeDelete,
-    required this.language,
-    required this.measurementUnit,
+    this.darkMode = true,
+    this.mealReminders = false,
+    this.newRecipeSuggestions = false,
+    this.confirmBeforeDelete = false,
+    this.language = 'English',
+    this.measurementUnit = 'Imperial',
+    this.apiKey = '',
   });
 }

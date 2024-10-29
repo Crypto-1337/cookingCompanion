@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:hive/hive.dart';
+import '../models/settings_model.dart'; // Importiere dein SettingsModel
 
 // Define the interface for the SpoonacularService
 abstract class SpoonacularServiceInterface {
@@ -15,12 +17,19 @@ abstract class SpoonacularServiceInterface {
 
 // Implement the SpoonacularServiceInterface
 class SpoonacularService implements SpoonacularServiceInterface {
-  final String apiKey = 'YOUR API KEY9'; // Set your API key here
   final String baseUrl = 'https://api.spoonacular.com';
+
+  // Lese den API-Key aus den Hive-Einstellungen
+  String _getApiKey() {
+    final settingsBox = Hive.box<SettingsModel>('settingsBox');
+    final settings = settingsBox.get('settings');
+    return settings?.apiKey ?? ''; // Falls kein Key vorhanden, leer zurückgeben
+  }
 
   // Fetch random recipes
   @override
   Future<List<dynamic>> getRandomRecipes(int number) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = Uri.parse('$baseUrl/recipes/random?apiKey=$apiKey&number=$number');
     final response = await http.get(url);
 
@@ -35,6 +44,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Fetch healthy recipes
   @override
   Future<List<dynamic>> getHealthyRecipes(int number) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = Uri.parse('$baseUrl/recipes/complexSearch?apiKey=$apiKey&number=$number&tags=healthy&addRecipeInformation=true');
     final response = await http.get(url);
 
@@ -49,6 +59,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Fetch trendy recipes (e.g., recipes sorted by popularity)
   @override
   Future<List<dynamic>> getTrendyRecipes(int number) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = Uri.parse('$baseUrl/recipes/complexSearch?apiKey=$apiKey&sort=popularity&number=$number&addRecipeInformation=true');
     final response = await http.get(url);
 
@@ -63,6 +74,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Search recipes with query, excluded ingredients, and intolerances
   @override
   Future<List<dynamic>> searchRecipes(String query, {List<String>? excludeIngredients, List<String>? intolerances}) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     String exclude = excludeIngredients?.join(',') ?? '';
     String intolerance = intolerances?.join(',') ?? '';
 
@@ -81,6 +93,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Find recipes by ingredients
   @override
   Future<List<dynamic>> findRecipesByIngredients(List<String> ingredients) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     String ingredientString = ingredients.join(',');
     final url = Uri.parse('$baseUrl/recipes/findByIngredients?apiKey=$apiKey&ingredients=$ingredientString&number=10');
     final response = await http.get(url);
@@ -96,6 +109,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Analyze uploaded recipe image
   @override
   Future<dynamic> analyzeRecipeImage(String imagePath) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = Uri.parse('$baseUrl/food/images/analyze?apiKey=$apiKey');
     var request = http.MultipartRequest('POST', url);
     request.files.add(await http.MultipartFile.fromPath('file', imagePath));
@@ -120,6 +134,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   // Implement autocomplete suggestions
   @override
   Future<List<dynamic>> getAutocompleteSuggestions(String query) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = Uri.parse('$baseUrl/recipes/autocomplete?apiKey=$apiKey&query=$query');
     final response = await http.get(url);
 
@@ -132,6 +147,7 @@ class SpoonacularService implements SpoonacularServiceInterface {
   }
 
   Future<Map<String, dynamic>> fetchRecipeDetails(int recipeId) async {
+    final apiKey = _getApiKey(); // API-Key jedes Mal abrufen
     final url = '$baseUrl/recipes/$recipeId/information?apiKey=$apiKey';
     final response = await http.get(Uri.parse(url));
 

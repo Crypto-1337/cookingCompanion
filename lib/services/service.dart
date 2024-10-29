@@ -175,6 +175,7 @@ class SettingsService {
       confirmBeforeDelete: false,
       language: 'English',
       measurementUnit: 'Imperial',
+      apiKey: ''
     );
 
     return settings; // This will now always return a non-null SettingsModel

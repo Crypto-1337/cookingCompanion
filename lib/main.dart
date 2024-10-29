@@ -24,7 +24,6 @@ import 'screens/recipes/trending_recipes_screen.dart';
 import 'screens/recipes/upload_image_screen.dart';
 
 void main() async {
-  // Ensure Flutter is initialized before running any async operations
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive with Flutter support
@@ -45,18 +44,12 @@ void main() async {
 
   // Fetch settings from the Hive box or create a new instance with default values
   var settingsBox = Hive.box<SettingsModel>('settingsBox');
-  SettingsModel settings = settingsBox.get('settings') ?? SettingsModel(
-    darkMode: true,
-    mealReminders: false,
-    newRecipeSuggestions: false,
-    confirmBeforeDelete: false,
-    language: 'English',
-    measurementUnit: 'Imperial',
-  );
+  SettingsModel settings = settingsBox.get('settings') ?? SettingsModel();
 
   // Run the app
   runApp(CookingCompanionApp(settings: settings));
 }
+
 
 class CookingCompanionApp extends StatefulWidget {
   const CookingCompanionApp({super.key, required this.settings});
