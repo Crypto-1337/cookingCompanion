@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cooking_compantion/services/service.dart';
-import '../../services/interface.dart';
-import '../recipe_detail_screen.dart';
-import '../../models/grocery_list_model.dart'; // Importiere das Modell für die Einkaufsliste
+import 'package:cooking_compantion/services/interface.dart';
+import 'package:cooking_compantion/screens/recipe_detail_screen.dart';
+import 'package:cooking_compantion/models/grocery_list_model.dart'; // Importiere das Modell für die Einkaufsliste
 
 class RecipesByIngredientsScreen extends StatefulWidget {
   const RecipesByIngredientsScreen({super.key});

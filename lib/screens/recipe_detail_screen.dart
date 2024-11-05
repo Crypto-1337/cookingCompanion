@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../services/interface.dart';
-import '../models/recipe_model.dart';
-import '../services/service.dart';
+import 'package:cooking_compantion/services/interface.dart';
+import 'package:cooking_compantion/models/recipe_model.dart';
+import 'package:cooking_compantion/services/service.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   final int recipeId;

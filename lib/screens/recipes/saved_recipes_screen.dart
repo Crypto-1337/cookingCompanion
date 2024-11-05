@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/service.dart';
-import '../../models/recipe_model.dart';
+import 'package:cooking_compantion/services/service.dart';
+import 'package:cooking_compantion/models/recipe_model.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
   const SavedRecipesScreen({super.key});

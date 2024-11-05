@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../services/interface.dart';
-import '../recipe_detail_screen.dart';
+import 'package:cooking_compantion/services/interface.dart';
+import 'package:cooking_compantion/screens/recipe_detail_screen.dart';
 
 class RandomRecipesScreen extends StatelessWidget {
   @override

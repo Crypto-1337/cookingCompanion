@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
-import '../models/settings_model.dart'; // Importiere dein SettingsModel
+import 'package:cooking_compantion/models/settings_model.dart'; // Importiere dein SettingsModel
 
 // Define the interface for the SpoonacularService
 abstract class SpoonacularServiceInterface {

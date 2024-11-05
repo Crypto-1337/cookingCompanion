@@ -10,18 +10,18 @@ import 'package:cooking_compantion/models/recipe_model.dart';
 import 'package:cooking_compantion/models/settings_model.dart';
 
 // Import the different screens
-import 'screens/home_screen.dart';
-import 'screens/grocery_list_screen.dart';
-import 'screens/recipe_screen.dart';
-import 'screens/meal_planner_screen.dart';
-import 'screens/settings_screen.dart';
-import 'screens/recipes/healthy_recipes_screen.dart';
-import 'screens/recipes/random_recipes_screen.dart';
-import 'screens/recipes/recipes_by_ingredients_screen.dart';
-import 'screens/recipes/saved_recipes_screen.dart';
-import 'screens/recipes/search_recipe_screen.dart';
-import 'screens/recipes/trending_recipes_screen.dart';
-import 'screens/recipes/upload_image_screen.dart';
+import 'package:cooking_compantion/screens/home_screen.dart';
+import 'package:cooking_compantion/screens/grocery_list_screen.dart';
+import 'package:cooking_compantion/screens/recipe_screen.dart';
+import 'package:cooking_compantion/screens/meal_planner_screen.dart';
+import 'package:cooking_compantion/screens/settings_screen.dart';
+import 'package:cooking_compantion/screens/recipes/healthy_recipes_screen.dart';
+import 'package:cooking_compantion/screens/recipes/random_recipes_screen.dart';
+import 'package:cooking_compantion/screens/recipes/recipes_by_ingredients_screen.dart';
+import 'package:cooking_compantion/screens/recipes/saved_recipes_screen.dart';
+import 'package:cooking_compantion/screens/recipes/search_recipe_screen.dart';
+import 'package:cooking_compantion/screens/recipes/trending_recipes_screen.dart';
+import 'package:cooking_compantion/screens/recipes/upload_image_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
