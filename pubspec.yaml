@@ -44,6 +44,7 @@ dependencies:
   path_provider: ^2.0.9
   image_picker: ^1.1.2
   settings_ui: ^2.0.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
