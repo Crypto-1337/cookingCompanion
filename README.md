@@ -24,7 +24,7 @@ Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre 
 
 ## Benutzeroberfläche
 
-- **Farbschema**: Modernes Design in Schwarz und Weinrot.
+- **Farbschema**: Modernes Design in Schwarz und Lila.
 - **UI-Elemente**: Klare Typografie, abgerundete Kanten, intuitive Navigation.
 - **Dark Mode**: Unterstützung für einen dunklen Modus, um die Benutzererfahrung zu verbessern.
 
@@ -36,27 +36,34 @@ Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre 
 2. **Grocery List Screen**:
    - Verwaltung von Einkaufslisten mit Checkboxen, Kategorien und einer Suchleiste.
 
-3. **Recipe Suggestions Screen**:
-   - Anzeige von Rezeptkarten mit Bildern, Namen und Schaltflächen zum Hinzufügen zu Mahlzeiten.
+3. **Recipe Screens**:
+   - Sammlung an Unterseiten mit folgenden funktionen: Rezepte suchen nach Zutaten, Rezepte suchen(autocompletion), Bilder hochladen und analysieren, gespeicherte Rezepte ansehen, zufällige Rezepte anzeigen und gesunde sowie trendy Rezepte anzeigen.
 
 4. **Meal Planner Screen**:
-   - Wöchentliche Kalenderansicht zur Planung von Frühstück, Mittagessen und Abendessen.
+   - Wöchentliche Ansicht zur Planung von Gerichten.
 
 5. **Settings Screen**:
-   - Anpassung der App-Optionen, einschließlich Kontoeinstellungen und API-Integration.
+   - Anpassung der App-Optionen, einschließlich API-Key Integration.
 
 ## Technische Details
 
 - **Framework**: Flutter (für plattformübergreifende Entwicklung auf iOS und Android).
-- **API**: Planung zur Integration einer Rezeptdatenbank-API.
-- **Zielplattformen**: iOS, Android und optional eine Weboberfläche.
+- **API**: Integration von der Spoonacular API.
+- **Zielplattformen**: IOS, Android und optional eine Weboberfläche.
 
 ## Nächste Schritte
 
-- Fertigstellung der UI-Designs.
-- Implementierung der Kernfunktionen.
+- Verschönerung des UI-Designs.
+- Implementierung der dynamischen Übersetzung für Spoonacular.
 - Testen der App auf verschiedenen Geräten.
 - Feedback von Benutzern einholen und Anpassungen vornehmen.
+
+## Erledigte Schritte
+
+- Fertigstellung des UIs.
+- Implementierung Dark- und Light-Mode
+- Implementierung der API.
+- Grobe Hauptfunktionen der App(Mealplanner, Rezept suche und speicherung, Einkaufsliste).
 
 ## Lizenz
 
