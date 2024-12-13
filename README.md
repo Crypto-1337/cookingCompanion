@@ -8,25 +8,22 @@ Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre 
 
 - **Einkaufslisten verwalten**:
   - Manuelles Hinzufügen, Abhaken und Entfernen von Artikeln.
-  - Verwaltung mehrerer Listen für verschiedene Geschäfte oder Anlässe.
 
 - **Rezeptvorschläge**:
   - Vorschläge für Rezepte basierend auf vorhandenen Zutaten.
-  - Integration einer Rezeptdatenbank-API wie Spoonacular.
+  - Integration einer Rezeptdatenbank-API (Spoonacular).
 
 - **Mahlzeiten planen**:
-  - Benutzer können ihre Mahlzeiten für die kommende Woche oder andere Zeiträume im Voraus planen.
-  - Automatische Aktualisierung der Einkaufslisten basierend auf den geplanten Mahlzeiten.
+  - Benutzer können ihre Mahlzeiten für die kommende Woche im Voraus planen.
 
-- **Teilen von Einkaufslisten**:
-  - Möglichkeit, Einkaufslisten in Echtzeit mit anderen zu teilen.
-  - Synchronisierung der Listen, sodass Änderungen sofort sichtbar sind.
+- **Dynamische Übersetzung**:
+  - Übersetzung von Rezepten, Zutaten und Anweisungen in die bevorzugte Sprache des Benutzers.
 
 ## Benutzeroberfläche
 
-- **Farbschema**: Modernes Design in Schwarz und Lila.
+- **Farbschema**: Modernes Design in Dunkelgrau und Lila.
 - **UI-Elemente**: Klare Typografie, abgerundete Kanten, intuitive Navigation.
-- **Dark Mode**: Unterstützung für einen dunklen Modus, um die Benutzererfahrung zu verbessern.
+- **Dark Mode**: Unterstützung für einen dunklen Modus, um die Benutzererfahrung zu verbessern (Standart eingeschaltet).
 
 ## Bildschirmübersicht
 
@@ -34,39 +31,53 @@ Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre 
    - Zentrale Anlaufstelle mit Übersicht über Einkaufslisten, Rezeptvorschläge und geplante Mahlzeiten.
 
 2. **Grocery List Screen**:
-   - Verwaltung von Einkaufslisten mit Checkboxen, Kategorien und einer Suchleiste.
+   - Verwaltung von Einkaufslisten mit Checkboxen.
 
 3. **Recipe Screens**:
-   - Sammlung an Unterseiten mit folgenden funktionen: Rezepte suchen nach Zutaten, Rezepte suchen(autocompletion), Bilder hochladen und analysieren, gespeicherte Rezepte ansehen, zufällige Rezepte anzeigen und gesunde sowie trendy Rezepte anzeigen.
+   - Sammlung an Unterseiten mit folgenden Funktionen:
+     - Rezepte suchen nach Zutaten
+     - Rezepte suchen (Autovervollständigung)
+     - Bilder hochladen und analysieren (Geschätzt)
+     - Gespeicherte Rezepte ansehen
+     - Zufällige Rezepte anzeigen
+     - Gesunde sowie trendy Rezepte anzeigen
 
 4. **Meal Planner Screen**:
    - Wöchentliche Ansicht zur Planung von Gerichten.
 
 5. **Settings Screen**:
-   - Anpassung der App-Optionen, einschließlich API-Key Integration.
+   - Anpassung der App-Optionen, einschließlich:
+     - API-Key-Integration
+     - Spracheinstellungen
+     - Light/Darkmode
+     - Einheiten (metrisch/imperial)
 
 ## Technische Details
 
 - **Framework**: Flutter (für plattformübergreifende Entwicklung auf iOS und Android).
-- **API**: Integration von der Spoonacular API.
-- **Zielplattformen**: IOS, Android und optional eine Weboberfläche.
+- **API**: Integration der Spoonacular API.
+- **Zielplattformen**: iOS, Android und optional eine Weboberfläche.
+- **Datenbank**: Hive zur lokalen Speicherung von Einstellungen und gespeicherten Rezepten.
 
 ## Nächste Schritte
 
-- Verschönerung des UI-Designs.
-- Implementierung der dynamischen Übersetzung für Spoonacular.
-- Testen der App auf verschiedenen Geräten.
-- Feedback von Benutzern einholen und Anpassungen vornehmen.
+- Verbesserung des UI-Designs.
+- Erweiterte Tests auf verschiedenen Geräten.
+- Nutzerfeedback einholen und umsetzen.
+- Integration einer Funktion zum Teilen von Einkaufslisten.
 
 ## Erledigte Schritte
 
-- Fertigstellung des UIs.
-- Implementierung Dark- und Light-Mode
-- Implementierung der API.
-- Grobe Hauptfunktionen der App(Mealplanner, Rezept suche und speicherung, Einkaufsliste).
+- Fertigstellung des Grundlayouts der App.
+- Implementierung von Dark- und Light-Mode.
+- Integration der Spoonacular API.
+- Umsetzung der Hauptfunktionen der App:
+  - Einkaufslistenverwaltung
+  - Rezeptsuche und -speicherung
+  - Mahlzeitenplaner
 
 ## Lizenz
 
-This app is exclusively owned by Jayson Cleve. Any redistribution, commercial use, or unauthorized modification of the codebase, design, or functionality is strictly forbidden and may lead to legal consequences.
+Diese App ist exklusiv von Jayson Cleve entwickelt. Jegliche Weitergabe, kommerzielle Nutzung oder unautorisierte Modifikation des Quellcodes, Designs oder der Funktionalität ist streng untersagt und kann rechtliche Konsequenzen nach sich ziehen.
 
-Please see the LICENSE file for detailed terms and conditions.
+Bitte siehe die LICENSE-Datei für detaillierte Nutzungsbedingungen.
