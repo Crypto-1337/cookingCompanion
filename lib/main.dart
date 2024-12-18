@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 // Import the models
 import 'package:cooking_compantion/models/grocery_list_model.dart';
@@ -27,7 +28,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive with Flutter support
-  Hive.init("Hive_db");
+  final directory = await getApplicationDocumentsDirectory();
+  Hive.init("${directory.path}/Hive_db");
 
   // Register adapters
   Hive.registerAdapter(GroceryListModelAdapter());
