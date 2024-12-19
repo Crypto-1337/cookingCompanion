@@ -28,8 +28,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive with Flutter support
-  final directory = await getApplicationDocumentsDirectory();
-  Hive.init("${directory.path}/Hive_db");
+  try {
+    final directory = await getApplicationDocumentsDirectory();
+    Hive.init("${directory.path}/Hive_db");
+  } catch(e) {
+    Hive.init("Hive_db");
+  }
 
   // Register adapters
   Hive.registerAdapter(GroceryListModelAdapter());
