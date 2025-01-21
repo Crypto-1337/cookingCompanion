@@ -1,83 +1,83 @@
 # Cooking Companion App
 
-## Projektübersicht
+## Project Overview
 
-Die Cooking Companion App ist eine moderne Anwendung, die Benutzern hilft, ihre Einkaufslisten zu verwalten, Rezeptvorschläge basierend auf vorhandenen Zutaten zu erhalten und ihre Mahlzeiten für die Woche zu planen. Die App bietet eine benutzerfreundliche Oberfläche, die es einfach macht, die täglichen Kochbedürfnisse zu erfüllen.
+The Cooking Companion App is a modern application designed to help users manage their grocery lists, get recipe suggestions based on available ingredients, and plan meals for the week. With a user-friendly interface, the app simplifies daily cooking needs.
 
-## Kernfunktionen
+## Core Features
 
-- **Einkaufslisten verwalten**:
-  - Manuelles Hinzufügen, Abhaken und Entfernen von Artikeln.
+- **Grocery List Management**:
+  - Add, check off, and remove items manually.
 
-- **Rezeptvorschläge**:
-  - Vorschläge für Rezepte basierend auf vorhandenen Zutaten.
-  - Integration einer Rezeptdatenbank-API (Spoonacular).
+- **Recipe Suggestions**:
+  - Receive recipe ideas based on available ingredients.
+  - Integration with the Spoonacular recipe database API.
 
-- **Mahlzeiten planen**:
-  - Benutzer können ihre Mahlzeiten für die kommende Woche im Voraus planen.
+- **Meal Planning**:
+  - Plan meals for the upcoming week in advance.
 
-- **Dynamische Übersetzung**:
-  - Übersetzung von Rezepten, Zutaten und Anweisungen in die bevorzugte Sprache des Benutzers.
+- **Dynamic Translation**:
+  - Translate recipes, ingredients, and instructions into the user's preferred language.
 
-## Benutzeroberfläche
+## User Interface
 
-- **Farbschema**: Modernes Design in Dunkelgrau und Lila.
-- **UI-Elemente**: Klare Typografie, abgerundete Kanten, intuitive Navigation.
-- **Dark Mode**: Unterstützung für einen dunklen Modus, um die Benutzererfahrung zu verbessern (Standart eingeschaltet).
+- **Color Scheme**: Modern design with dark gray and purple tones.
+- **UI Elements**: Clean typography, rounded edges, and intuitive navigation.
+- **Dark Mode**: Built-in support for dark mode to enhance user experience (enabled by default).
 
-## Bildschirmübersicht
+## Screen Overview
 
 1. **Home Screen (Dashboard)**:
-   - Zentrale Anlaufstelle mit Übersicht über Einkaufslisten, Rezeptvorschläge und geplante Mahlzeiten.
+   - Central hub showing an overview of grocery lists, recipe suggestions, and planned meals.
 
 2. **Grocery List Screen**:
-   - Verwaltung von Einkaufslisten mit Checkboxen.
+   - Manage grocery lists with checkboxes.
 
 3. **Recipe Screens**:
-   - Sammlung an Unterseiten mit folgenden Funktionen:
-     - Rezepte suchen nach Zutaten
-     - Rezepte suchen (Autovervollständigung)
-     - Bilder hochladen und analysieren (Geschätzt)
-     - Gespeicherte Rezepte ansehen
-     - Zufällige Rezepte anzeigen
-     - Gesunde sowie trendy Rezepte anzeigen
+   - Collection of sub-screens with the following features:
+     - Search recipes by ingredients.
+     - Search recipes with autocomplete functionality.
+     - Upload and analyze images (experimental).
+     - View saved recipes.
+     - Display random recipes.
+     - Explore healthy and trending recipes.
 
 4. **Meal Planner Screen**:
-   - Wöchentliche Ansicht zur Planung von Gerichten.
+   - Weekly view for meal planning.
 
 5. **Settings Screen**:
-   - Anpassung der App-Optionen, einschließlich:
-     - API-Key-Integration
-     - Spracheinstellungen
-     - Light/Darkmode
-     - Einheiten (metrisch/imperial)
+   - Customize app options, including:
+     - API key integration.
+     - Language preferences.
+     - Light/Dark mode.
+     - Measurement units (metric/imperial).
 
-## Technische Details
+## Technical Details
 
-- **Framework**: Flutter (für plattformübergreifende Entwicklung auf iOS und Android).
-- **API**: Integration der Spoonacular API.
-- **Zielplattformen**: iOS, Android und optional eine Weboberfläche.
-- **Datenbank**: Hive zur lokalen Speicherung von Einstellungen und gespeicherten Rezepten.
+- **Framework**: Flutter (for cross-platform development on iOS and Android).
+- **API**: Integration with the Spoonacular API.
+- **Target Platforms**: iOS, Android, and optionally a web interface.
+- **Database**: Hive for local storage of settings and saved recipes.
 
-## Nächste Schritte
+## Next Steps
 
-- Verbesserung des UI-Designs.
-- Erweiterte Tests auf verschiedenen Geräten.
-- Nutzerfeedback einholen und umsetzen.
-- Integration einer Funktion zum Teilen von Einkaufslisten.
+- Improve UI design.
+- Conduct extensive testing on multiple devices.
+- Collect and implement user feedback.
+- Add a feature for sharing grocery lists.
 
-## Erledigte Schritte
+## Completed Steps
 
-- Fertigstellung des Grundlayouts der App.
-- Implementierung von Dark- und Light-Mode.
-- Integration der Spoonacular API.
-- Umsetzung der Hauptfunktionen der App:
-  - Einkaufslistenverwaltung
-  - Rezeptsuche und -speicherung
-  - Mahlzeitenplaner
+- Basic app layout finalized.
+- Implementation of both dark and light modes.
+- Spoonacular API integration.
+- Core functionalities developed:
+  - Grocery list management.
+  - Recipe search and storage.
+  - Meal planner functionality.
 
-## Lizenz
+## License
 
-Diese App ist exklusiv von Jayson Cleve entwickelt. Jegliche Weitergabe, kommerzielle Nutzung oder unautorisierte Modifikation des Quellcodes, Designs oder der Funktionalität ist streng untersagt und kann rechtliche Konsequenzen nach sich ziehen.
+This app is exclusively developed by Jayson Cleve. Any redistribution, commercial use, or unauthorized modification of the source code, design, or functionality is strictly prohibited and may result in legal consequences.
 
-Bitte siehe die LICENSE-Datei für detaillierte Nutzungsbedingungen.
+Please refer to the LICENSE file for detailed terms of use.
